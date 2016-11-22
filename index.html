@@ -19,6 +19,9 @@
         <label for="first_name">Documento</label>
         <i class="medium material-icons" id="btnBuscar">search</i>
       </div>
+      <input type="hidden" name="id_estudiante" id="id_estudiante" value="">
+      
+      <div id="respuesta" class="col s12"></div>
     </div>
     
       <!--Import jQuery before materialize.js-->
@@ -35,14 +38,24 @@
               url:'consultardocumento.php',
               data: {documento: documento},
               type: 'POST',
+              dataType: 'json',
               success: function(respuesta){
-                alert(respuesta);
+                
+                $("#respuesta").html("");
+                
+                if(respuesta.estado == 2){
+                  Materialize.toast(respuesta.mensaje, 4000)
+                }else{
+                  $("#respuesta").html(respuesta.nombre + respuesta.apellidos);
+                  $("#id_estudiante").val(respuesta.id);
+                }
+                
               }
             });
 
           });
 
-          
+             
 
         });
 
