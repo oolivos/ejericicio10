@@ -15,23 +15,41 @@
     
     <div class="row">
       <div class="input-field col s6">
-        <input placeholder="Placeholder" id="documento" type="text" class="validate">
-        <label for="first_name">First Name</label>
-        <i class="medium material-icons"  >search</i>
+        <input placeholder="No de Documento" id="documento" type="number" class="validate">
+        <label for="first_name">Documento</label>
+        <i class="medium material-icons" id="btnBuscar">search</i>
       </div>
-    
     </div>
     
-
-
-
-
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
       <script type="text/javascript">
-        
+        $(document).ready(function() {
+          
+          $("#btnBuscar").click(function(){
+            //alert("Clickleado!!")
+            var documento = $("#documento").val();
+            //alert(documento);
+            $.ajax({
+              url:'consultardocumento.php',
+              data: {documento: documento},
+              type: 'POST',
+              success: function(respuesta){
+                alert(respuesta);
+              }
+            });
+
+          });
+
+          
+
+        });
 
       </script>
     </body>
   </html>
+
+
+
+
